@@ -1,6 +1,10 @@
 package com.example.design1;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -30,9 +34,13 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(recyclerAdapterForHome);
     }
-
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public void seeContests(View view) {
+
         Intent intent = new Intent(this, ContestActivity.class);
-        startActivity(intent);
+        ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeCustomAnimation(MainActivity.this,0,R.anim.slideup_animation);
+        startActivity(intent, optionsCompat.toBundle());
+        //startActivity(intent);
     }
 }
